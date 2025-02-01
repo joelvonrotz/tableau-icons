@@ -340,55 +340,6 @@
   "dice-2",
 )
 
-#let icons = (
-  "accessible",
-  "ad-circle",
-  "ad",
-  "adjustments",
-  "aerial-lift",
-  "affiliate",
-  "air-balloon",
-  "alarm-minus",
-  "alarm-plus",
-  "alarm-snooze",
-  "alarm",
-  "alert-circle",
-  "alert-hexagon",
-  "alert-octagon",
-  "alert-square-rounded",
-  "alert-square",
-  "alert-triangle",
-  "alien",
-  "align-box-bottom-center",
-  "align-box-bottom-left",
-  "align-box-bottom-right",
-  "align-box-center-middle",
-  "align-box-left-bottom",
-  "align-box-left-middle",
-  "align-box-left-top",
-  "align-box-right-bottom",
-  "align-box-right-middle",
-  "align-box-right-top",
-  "align-box-top-center",
-  "align-box-top-left",
-  "align-box-top-right",
-  "analyze",
-  "app-window",
-  "apple",
-  "apps",
-  "archive",
-  "arrow-autofit-content",
-  "arrow-autofit-down",
-  "arrow-autofit-height",
-  "arrow-autofit-left",
-  "arrow-autofit-right",
-  "arrow-autofit-up",
-  "arrow-autofit-width",
-  "arrow-badge-down",
-  "arrow-badge-left",
-  "arrow-badge-right",
-)
-
 #box(clip: true, width: 100%, height: 8cm)[
   #box(
     inset: (left: -3cm, top: -3cm),
@@ -613,20 +564,19 @@ If some adjustments to the functions or a new Tabler icon version is released, t
 
 
 1. Clone the repositories of the package and the _Tabler Icons_ somewhere smart
-2. remove the `icons` folder inside the package repository
-3. Copy the `icons` folder from the _Tabler Icons_ repository into the package folder
+2. Install python and call the `generate_svg_spritesheets.py` script inside the `tools` folder of the package repository
 
 ```bash
 $ cd ~
 $ git clone git@github.com:joelvonrotz/tableau-icons.git
-$ git clone git@github.com:tabler/tabler-icons.git
-$ rm -r ./tableau-icons/icons # delete the current icons (something might have changed with the icons themselves)
-$ cp -r ./tabler-icons/icons/ ./tableau-icons/ # copy new icons to package repo
+$ git clone git@github.com:tabler/tabler-icons.git # or pull if already exists
+$ cd tableau-icons/tools
+$ python ./generate_svg_spritesheets.py
 ```
 
 #[
 #set enum(numbering: (it => text(weight: "bold", color.darken(red, 10%))[#it.]))
-4. Don't forget to update the package info and the changelog below!
+3. Don't forget to update the package info and the changelog below!
 ]
 
 = Changelog
@@ -641,3 +591,4 @@ $ cp -r ./tabler-icons/icons/ ./tableau-icons/ # copy new icons to package repo
 #line(length: 30%)
 *Used Fonts*: #text(blue,underline(offset: 0.2em,link("https://www.brailleinstitute.org/freefont/",[Atkinson Hyperlegible]))), #text(blue,underline(offset: 0.2em,link("https://github.com/microsoft/cascadia-code",[Cascadia Code])))\
 *Created By* Joel von Rotz (\@joelvonrotz on #tbl.inline-filled("brand-github"))
+
