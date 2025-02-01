@@ -1,3 +1,4 @@
+#import "@preview/based:0.2.0": base64
 
 #let PATH_ICONS = "./icons/"
 #let DEFAULT_BASELINE = 15%
@@ -5,6 +6,9 @@
 // preload the icon lists
 #let _full_filled = read(PATH_ICONS + "tabler-filled.svg")
 #let _full_outlined = read(PATH_ICONS + "tabler-outline.svg")
+
+#let _json_filled = json("icons/tabler-filled.json")
+#let _json_outlined = json("icons/tabler-outline.json")
 
 
 /* -------------------------------------------------------------------------- */
@@ -31,28 +35,44 @@
 
   let result_svg = ""
   if icon_type == "outline" {
-    result_svg = _full_outlined
-      .match(regex("<symbol.*id=\"" + body + "\".*</symbol>"))
-      .text
-      .replace("<symbol", "<svg")
-      .replace("/symbol>", "/svg>")
-      .replace("currentColor", color.to-hex(fill))
+    result_svg = _json_outlined.at(body)
   } else {
-    result_svg = _full_filled
-      .match(regex("<symbol.*id=\"" + body + "\".*</symbol>"))
-      .text
-      .replace("<symbol", "<svg")
-      .replace("/symbol>", "/svg>")
-      .replace("currentColor", color.to-hex(fill))
+    result_svg = _json_filled.at(body)
   }
+  
+
   image.decode(
-    result_svg,
+    str(base64.decode(result_svg)).replace("currentColor", color.to-hex(fill)),
     width: width,
     height: height,
     fit: "contain",
     alt: body,
     format: "svg",
   )
+  
+  //if icon_type == "outline" {
+  //  result_svg = _full_outlined
+  //    .match(regex("<symbol.*id=\"" + body + "\".*</symbol>"))
+  //    .text
+  //    .replace("<symbol", "<svg")
+  //    .replace("/symbol>", "/svg>")
+  //    .replace("currentColor", color.to-hex(fill))
+  //} else {
+  //  result_svg = _full_filled
+  //    .match(regex("<symbol.*id=\"" + body + "\".*</symbol>"))
+  //    .text
+  //    .replace("<symbol", "<svg")
+  //    .replace("/symbol>", "/svg>")
+  //    .replace("currentColor", color.to-hex(fill))
+  //}
+  //image.decode(
+  //  result_svg,
+  //  width: width,
+  //  height: height,
+  //  fit: "contain",
+  //  alt: body,
+  //  format: "svg",
+  //)
 }
 
 
