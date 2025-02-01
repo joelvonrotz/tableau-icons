@@ -2,19 +2,25 @@
 #let PATH_ICONS = "./icons/"
 #let DEFAULT_BASELINE = 15%
 
+// preload the icon lists
+#let full_filled = read(PATH_ICONS + "tabler-filled.svg")
+#let full_outlined = read(PATH_ICONS + "tabler-outline.svg")
+
+
 /* -------------------------------------------------------------------------- */
 /*                              General Functions                             */
 /* -------------------------------------------------------------------------- */
+
 
 
 /// The base function used for the other functions to draw icons from Tabler.io
 ///
 /// - body (str): icon name
 /// - fill (color): color of the icon
-/// - icon_type (str): style type of the icon (either "filled" or "outline") 
+/// - icon_type (str): style type of the icon (either "filled" or "outline")
 /// - width (length): width of the icon (icon is contained)
 /// - height (length): height of the icon (icon is contained)
-/// -> 
+/// ->
 #let icon(body, fill: rgb("#000000"), icon_type: "outline", width: 1em, height: auto) = {
   if (type(body) != str) {
     panic("'icon' not set")
@@ -23,11 +29,24 @@
     panic("'icon' not set to either 'outline' or 'filled'")
   }
 
-  let icon_path = PATH_ICONS + icon_type + "/" + body + ".svg"
-
-
+  let result_svg = ""
+  if icon_type == "outline" {
+    result_svg = full_outlined
+      .match(regex("<symbol.*id=\"" + body + "\".*</symbol>"))
+      .text
+      .replace("<symbol", "<svg")
+      .replace("/symbol>", "/svg>")
+      .replace("currentColor", color.to-hex(fill))
+  } else {
+    result_svg = full_filled
+      .match(regex("<symbol.*id=\"" + body + "\".*</symbol>"))
+      .text
+      .replace("<symbol", "<svg")
+      .replace("/symbol>", "/svg>")
+      .replace("currentColor", color.to-hex(fill))
+  }
   image.decode(
-    read(icon_path).replace("currentColor", color.to-hex(fill)),
+    result_svg,
     width: width,
     height: height,
     fit: "contain",
@@ -35,6 +54,7 @@
     format: "svg",
   )
 }
+
 
 /* -------------------------------------------------------------------------- */
 /*                              Special Functions                             */
