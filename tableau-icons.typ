@@ -4,9 +4,6 @@
 #let DEFAULT_BASELINE = 15%
 
 // preload the icon lists
-#let _full_filled = read(PATH_ICONS + "tabler-filled.svg")
-#let _full_outlined = read(PATH_ICONS + "tabler-outline.svg")
-
 #let _json_filled = json("icons/tabler-filled.json")
 #let _json_outlined = json("icons/tabler-outline.json")
 
@@ -40,7 +37,6 @@
     result_svg = _json_filled.at(body)
   }
   
-
   image.decode(
     str(base64.decode(result_svg)).replace("currentColor", color.to-hex(fill)),
     width: width,
