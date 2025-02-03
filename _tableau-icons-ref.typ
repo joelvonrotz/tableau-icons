@@ -1,4 +1,4 @@
-#let tabler-icons-unicode = (
+#let _tabler-icons-unicode = (
   "a-b": "\u{ec36}",
   "a-b-2": "\u{f25f}",
   "a-b-off": "\u{f0a6}",

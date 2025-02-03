@@ -32,13 +32,13 @@
     width: width,
     align(
       center + horizon,
-      if body in tabler-icons-unicode {
+      if body in _tabler-icons-unicode {
         text(
           bottom-edge: "descender",
           font: "tabler-icons",
           fill: fill,
           size: calc.min(height, width),
-          tabler-icons-unicode.at(body),
+          _tabler-icons-unicode.at(body),
         )
       } else {
         text(
