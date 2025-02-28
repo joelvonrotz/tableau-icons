@@ -1,4 +1,4 @@
-#import "../tableau-icons.typ"
+#import "@preview/tableau-icons:0.330.0": *
 #import "thumbnail_list.typ": *
 
 #import "@preview/tidy:0.4.1"

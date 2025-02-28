@@ -27,7 +27,8 @@
   /// Name of the icon. Search the icon on #text(blue,underline(link("https://tabler.io/icons"))) and copy the label. Attach `-filled` to get the filled version of the icon.
   /// 
   /// #import "@preview/shadowed:0.2.0": shadowed
-  /// #import "@preview/tableau-icons:0.1.0"
+  /// #import "@preview/tableau-icons:0.330.0": *
+
   /// #grid(columns: (1fr, 1fr))[
   ///    #shadowed(radius: 4pt, color: color.lighten(black, 50%))[
   ///      ```typst
@@ -59,7 +60,8 @@
   /// Configures the color of the icon
   /// 
   /// #import "@preview/shadowed:0.2.0": shadowed
-  /// #import "@preview/tableau-icons:0.1.0"
+  /// #import "@preview/tableau-icons:0.330.0": *
+
   /// #grid(columns: (1fr, 1fr))[
   ///    #shadowed(radius: 4pt, color: color.lighten(black, 50%))[
   ///      ```typst
@@ -89,7 +91,8 @@
   /// Height of the icon
   /// 
   /// #import "@preview/shadowed:0.2.0": shadowed
-  /// #import "@preview/tableau-icons:0.1.0"
+  /// #import "@preview/tableau-icons:0.330.0": *
+
   /// #grid(columns: (1fr, 1fr))[
   ///    #shadowed(radius: 4pt, color: color.lighten(black, 50%))[
   ///      ```typst
@@ -118,7 +121,8 @@
   /// Width of the icon
   /// 
   /// #import "@preview/shadowed:0.2.0": shadowed
-  /// #import "@preview/tableau-icons:0.1.0"
+  /// #import "@preview/tableau-icons:0.330.0": *
+
   /// #grid(columns: (1fr, 1fr))[
   ///    #shadowed(radius: 4pt, color: color.lighten(black, 50%))[
   ///      ```typst
@@ -146,7 +150,8 @@
   /// Arguments for the box (such as `baseline`), which the icon is encased in.
   /// 
   /// #import "@preview/shadowed:0.2.0": shadowed
-  /// #import "@preview/tableau-icons:0.1.0"
+  /// #import "@preview/tableau-icons:0.330.0": *
+
   /// #grid(columns: (1fr, 1fr))[
   ///    #shadowed(radius: 4pt, color: color.lighten(black, 50%))[
   ///      ```typst 
