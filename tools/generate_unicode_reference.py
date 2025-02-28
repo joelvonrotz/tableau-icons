@@ -1,4 +1,4 @@
-import glob, re,os,base64,sys
+import re,os,sys
 
 
 os.chdir('../../tabler-icons-3.29.0/webfont') # set the working directory to make the script a bit faster
