@@ -1,10 +1,10 @@
 [package]
 name = "tableau-icons"
-version = "0.330.0"
+version = "0.331.0"
 entrypoint = "lib.typ"
 authors = [ "Joel von Rotz",]
 license = "MIT"
-description = "Tabler.io Icons v3.30.0 for Typst"
+description = "Tabler.io Icons v3.31.0 for Typst"
 repository = "https://github.com/joelvonrotz/tableau-icons"
 keywords = [ "icon", "github", "tabler icons",]
 categories = [ "text",]
