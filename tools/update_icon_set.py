@@ -167,10 +167,23 @@ contents = file.read()
 file.close()
 
 contents = re.sub(r"#import \"@preview\/tableau-icons:.+?\": \*",
-        repl=f"#import \"@preview/tableau-icons:{config['package']['version']}: *",
+        repl=f"#import \"@preview/tableau-icons:{config['package']['version']}\": *",
         string=contents)
 
+
+
 file = open("./tableau-icons.typ","w")
+file.write(contents)
+file.close()
+
+file = open("./docs/tableau-icons-doc.typ","r")
+contents = file.read()
+file.close()
+
+contents = re.sub(r"#import \"..\/lib.typ\" as tableau-icons",
+        repl=f"#import \"@preview/tableau-icons:{config['package']['version']}\": *",
+        string=contents)
+file = open("./docs/tableau-icons-doc.typ","w")
 file.write(contents)
 file.close()
 
