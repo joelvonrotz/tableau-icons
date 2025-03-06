@@ -8,4 +8,4 @@ description = "Tabler.io Icons v3.30.0 for Typst"
 repository = "https://github.com/joelvonrotz/tableau-icons"
 keywords = [ "icon", "github", "tabler icons",]
 categories = [ "text",]
-exclude = [ "docs", "tools",]
+exclude = [ "docs", "tools", ".gitignore",]
