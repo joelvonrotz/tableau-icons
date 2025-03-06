@@ -127,7 +127,7 @@ input("> Now's your chance to edit the new documents, before they get copied.\n>
 # ---------------------------------------------------------------------------- #
 #                         Copy project into new folder                         #
 # ---------------------------------------------------------------------------- #
-print("Copying files into '{config['package']['version']}', which can be moved to the typst update folder")
+print(f"Copying files into '{config['package']['version']}', which can be moved to the typst update folder")
 os.makedirs(f"../{config['package']['version']}/docs/",exist_ok=True)
 os.chdir(f"../{config['package']['version']}/")
 
@@ -141,6 +141,8 @@ files = [
     ("../LICENSE",                      "./LICENSE"),
     ("../README.md",                    "./README.md"),
     ("../tableau-icons.typ",            "./tableau-icons.typ"),
+    ("../lib.typ",                      "./lib.typ"),
+    ("../.gitignore",                   "./.gitignore"),
     ("../typst.toml",                   "./typst.toml"),
 ]
 
@@ -155,10 +157,9 @@ file = open("./tableau-icons.typ","r")
 contents = file.read()
 file.close()
 
-re.sub(r"/#import \"@preview\/tableau-icons:(.+?)\": \*",
+contents = re.sub(r"#import \"@preview\/tableau-icons:.+?\": \*",
         repl=f"#import \"@preview/tableau-icons:{config['package']['version']}: *",
-        string=contents,
-        flags=re.RegexFlag.MULTILINE)
+        string=contents)
 
 file = open("./tableau-icons.typ","w")
 file.write(contents)
