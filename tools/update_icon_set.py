@@ -1,6 +1,4 @@
-import subprocess, sys, os, glob, re
-
-
+import subprocess, sys, os, glob, re, shutil
 
 
 def retrieve_unicode_references(webfont_path: str) -> dict:
@@ -45,7 +43,6 @@ print("Unzipping '" + path + "'")
 with zipfile.ZipFile(path + "","r") as zip_ref:
     zip_ref.extractall("./unzipped")
 
-
 # ---------------------------------------------------------------------------- #
 #                         Extracting Unicode References                        #
 # ---------------------------------------------------------------------------- #
@@ -66,6 +63,12 @@ for (key, value) in unicodes.items():
 output.write(")")
 output.close()
 
+# ---------------------------------------------------------------------------- #
+#                         Copy new font somewhere safe                         #
+# ---------------------------------------------------------------------------- #
+shutil.copy("./tmp/unzipped/webfont/fonts/tabler-icons.ttf","../tabler-icons.ttf")
+shutil.copy("./tmp/unzipped/webfont/fonts/tabler-icons-200.ttf","../tabler-icons-200.ttf")
+shutil.copy("./tmp/unzipped/webfont/fonts/tabler-icons-300.ttf","../tabler-icons-300.ttf")
 
 # ---------------------------------------------------------------------------- #
 #                                For Doc Header                                #
@@ -118,10 +121,53 @@ file_changelog.write(f"""{new_log}
 file_changelog.close()
 
 
+input("> Now's your chance to edit the new documents, before they get copied.\n> Once you're done, click enter in this terminal to continue!")
+
+
+# ---------------------------------------------------------------------------- #
+#                         Copy project into new folder                         #
+# ---------------------------------------------------------------------------- #
+print("Copying files into '{config['package']['version']}', which can be moved to the typst update folder")
+os.makedirs(f"../{config['package']['version']}/docs/",exist_ok=True)
+os.chdir(f"../{config['package']['version']}/")
+
+files = [
+    ("../docs/banner.png",              "./docs/banner.png"),
+    ("../docs/changelog.typ",           "./docs/changelog.typ"),
+    ("../docs/tableau-icons-doc.typ",   "./docs/tableau-icons-doc.typ"),
+    ("../docs/tableau-icons-doc.pdf",   "./docs/tableau-icons-doc.pdf"),
+    ("../docs/thumbnail_list.typ",      "./docs/thumbnail_list.typ"),
+    ("../_tableau-icons-ref.typ",       "./_tableau-icons-ref.typ"),
+    ("../LICENSE",                      "./LICENSE"),
+    ("../README.md",                    "./README.md"),
+    ("../tableau-icons.typ",            "./tableau-icons.typ"),
+    ("../typst.toml",                   "./typst.toml"),
+]
+
+for (src, dst) in files:
+    shutil.copy(src,dst)
+
+
+# ------------------------- Rename package references ------------------------ #
+print(f"Replacing old package imports with new version {config['package']['version']}")
+
+file = open("./tableau-icons.typ","r")
+contents = file.read()
+file.close()
+
+re.sub(r"/#import \"@preview\/tableau-icons:(.+?)\": \*",
+        repl=f"#import \"@preview/tableau-icons:{config['package']['version']}: *",
+        string=contents,
+        flags=re.RegexFlag.MULTILINE)
+
+file = open("./tableau-icons.typ","w")
+file.write(contents)
+file.close()
+
+os.chdir("../tools/")
 # ---------------------------------------------------------------------------- #
 #                                   Clean Up                                   #
 # ---------------------------------------------------------------------------- #
-import shutil
 print("Deleting temporary folder")
 shutil.rmtree('./tmp')
 
