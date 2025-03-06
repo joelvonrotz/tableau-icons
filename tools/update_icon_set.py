@@ -122,7 +122,6 @@ with open("../docs/changelog.typ", "w") as file_changelog:
 
     {current_changelog}
     """)
-    file_changelog.flush()
 
 
 input("> Now's your chance to edit the new documents, before they get copied.\n> Once you're done, click enter in this terminal to continue!")
@@ -131,7 +130,7 @@ input("> Now's your chance to edit the new documents, before they get copied.\n>
 #                 Render the documentation with new information                #
 # ---------------------------------------------------------------------------- #
 print("compiling documentation")
-subprocess.run(["typst","compile","../docs/tableau-icons-docs.typ","--font-path","../fonts","--root",".."])
+subprocess.run(["typst","compile","../docs/tableau-icons-doc.typ","--font-path","../fonts","--root",".."])
 print("compiling banner")
 subprocess.run(["typst","compile","../docs/banner.typ","--format","png","--font-path","../fonts","--root",".."])
 # ---------------------------------------------------------------------------- #
