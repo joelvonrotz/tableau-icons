@@ -69,6 +69,7 @@ output.close()
 #                         Copy new font somewhere safe                         #
 # ---------------------------------------------------------------------------- #
 shutil.copy("./tmp/unzipped/webfont/fonts/tabler-icons.ttf","../tabler-icons.ttf")
+shutil.copy("./tmp/unzipped/webfont/fonts/tabler-icons.ttf","../fonts/tabler-icons.ttf") # this one is important for compiling the documentation!
 shutil.copy("./tmp/unzipped/webfont/fonts/tabler-icons-200.ttf","../tabler-icons-200.ttf")
 shutil.copy("./tmp/unzipped/webfont/fonts/tabler-icons-300.ttf","../tabler-icons-300.ttf")
 
@@ -125,7 +126,11 @@ file_changelog.close()
 
 input("> Now's your chance to edit the new documents, before they get copied.\n> Once you're done, click enter in this terminal to continue!")
 
+# ---------------------------------------------------------------------------- #
+#                 Render the documentation with new information                #
+# ---------------------------------------------------------------------------- #
 
+subprocess.run(["typst","compile","../docs/tableau-icons-docs.typ","--font-path","../fonts","--root",".."])
 # ---------------------------------------------------------------------------- #
 #                         Copy project into new folder                         #
 # ---------------------------------------------------------------------------- #
