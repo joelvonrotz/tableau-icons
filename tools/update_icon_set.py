@@ -116,21 +116,24 @@ new_log = f"""== `v{config['package']['version']}`
 - updated Tabler Icons version v{tabler_icons_version}
 """
 
-file_changelog = open("../docs/changelog.typ", "w")
-file_changelog.write(f"""{new_log}
+with open("../docs/changelog.typ", "w") as file_changelog:
+    file_changelog.write(f"""{new_log}
 
-{current_changelog}
-""")
-file_changelog.close()
+    {current_changelog}
+    """)
 
+import time
+time.sleep(4)
 
 input("> Now's your chance to edit the new documents, before they get copied.\n> Once you're done, click enter in this terminal to continue!")
 
 # ---------------------------------------------------------------------------- #
 #                 Render the documentation with new information                #
 # ---------------------------------------------------------------------------- #
-
+print("compiling documentation")
 subprocess.run(["typst","compile","../docs/tableau-icons-docs.typ","--font-path","../fonts","--root",".."])
+print("compiling banner")
+subprocess.run(["typst","compile","../docs/banner.typ","--format","png","--font-path","../fonts","--root",".."])
 # ---------------------------------------------------------------------------- #
 #                         Copy project into new folder                         #
 # ---------------------------------------------------------------------------- #
