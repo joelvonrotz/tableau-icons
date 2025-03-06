@@ -103,6 +103,7 @@ config['package']['description'] = f"Tabler.io Icons v{tabler_icons_version} for
 
 f = open("../typst.toml",'w')
 toml.dump(config,f)
+f.close()
 
 # ---------------------------------------------------------------------------- #
 #                             Update Changelog File                            #
@@ -121,9 +122,8 @@ with open("../docs/changelog.typ", "w") as file_changelog:
 
     {current_changelog}
     """)
+    file_changelog.flush()
 
-import time
-time.sleep(4)
 
 input("> Now's your chance to edit the new documents, before they get copied.\n> Once you're done, click enter in this terminal to continue!")
 
