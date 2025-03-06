@@ -1,7 +1,7 @@
-#import "@preview/tableau-icons:0.330.0": *
+#import "../lib.typ" as tableau-icons
 #import "thumbnail_list.typ": *
 
-#import "@preview/tidy:0.4.1"
+#import "@preview/tidy:0.4.2"
 #import "@preview/shadowed:0.2.0": shadowed
 
 /* -------------------------------------------------------------------------- */
@@ -142,8 +142,9 @@ Include the package as any other package:
 #show "->": it => { raw("->") }
 #let docs = tidy.parse-module(
   read("../tableau-icons.typ"),
-  scope: (module: tableau-icons),
-  preamble: "#import module: *;",
+  name: "tableau-icons",
+  scope: (tableau-icons: tableau-icons),
+  preamble: "#import tableau-icons: *;",
 )
 
 #show "->": $->$
