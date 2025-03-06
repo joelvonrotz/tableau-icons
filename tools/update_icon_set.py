@@ -14,7 +14,9 @@ def retrieve_unicode_references(webfont_path: str) -> dict:
     return unicode_dict
 
 
-
+print("Deleting temporary folder")
+shutil.rmtree('./tmp',ignore_errors=True)
+    
 
 # ---------------------------------------------------------------------------- #
 #                          Tabler.io Icons Downloader                          #
