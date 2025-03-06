@@ -85,7 +85,7 @@
               fill: white,
               inset: 2em,
               radius: 1em,
-              align(center + horizon)[#text(weight: "bold", 4em, font: "Atkinson Hyperlegible")[tableau-icons.typ]],
+              align(center + horizon)[#text(weight: "bold", 4em, font: "Atkinson Hyperlegible Next")[tableau-icons.typ]],
             )
             #block(height: 2em, above: 0.3em)[
               #set align(center + horizon)
