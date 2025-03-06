@@ -1,2 +1,4 @@
 tabler-icons*.ttf
-export
+
+# ignore any version folders
+*.*.*
